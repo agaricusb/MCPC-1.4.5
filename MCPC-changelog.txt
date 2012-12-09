@@ -1,0 +1,5 @@
+Changelog:
+
+Build MCPC-1.4.5-beta-1
+	blood
+		initial release. Still much work to be done but it is guaranteed to work with MoCreatures 4.3.1

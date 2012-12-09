@@ -1,0 +1,52 @@
+Changelog:
+
+Build 1.4.5-6.4.0.396
+	ohai.iChun
+		Add check that Entity saves to disk before saving entity to saved chunkloading data.
+		Returning false to addEntityID prevents the entity from being saved (cred to LexManos)
+		Entities which do not save to disk but are chunkloaders causes errors the next time the world loads. This ought to fix it.
+
+Build 1.4.5-6.4.0.395
+	LexManos: Updated FML, proper free-sprite list for /gui/items.png, and fixed MCP version.
+
+Build 1.4.5-6.4.0.394
+	cpw
+		Move server specific patch back to common from minecraft.
+		Update FML: 1f5c58b
+		1f5c58b Fix up MCP version
+		61e4db2 Merge joined.exc add update howto
+		5efc1eb Revert "Fix MC-2497 - derpy torch flames. Moved from forge. Everyone sho
+		3b3600d Modified merger to just consider all server classes as common. And moved
+		edcc5ca Forgot mcp.cfg
+		ca79dfe Updated to 1.4.5b
+		5945279 Fix python error
+		57bf643 Modified decompile so that we do not have to decompile the server, saves
+		d9d0a46 Cleaned up some tabs
+		2fac644 Change usage of ZipFile, fixes issues with Mac's default instation of py
+
+Build 1.4.5-6.4.0.393
+	LexManos: Fix TE Issue
+
+Build 1.4.5-6.4.0.390
+	LexManos: Updated to MC 1.4.5b
+
+Build 1.4.5-6.4.0.397
+	LexManos: Removed GnuWin32 programs, should no longer be needed as we've moved to python.
+
+Build 1.4.5-6.4.0.388
+	cpw: Stupid eclipse resetting preferences. Spaces, not tabs!!!
+	cpw
+		Update FML: 570592b
+		570592b Attempt to fix a possible comodification risk
+
+Build 1.4.5-6.4.0.387
+	cpw: Add in events when forcing and unforcing chunks. Hope this works for you ChickenBones!
+
+Build 1.4.5-6.4.0.386
+	cpw
+		Update FML: fde9414
+		fde9414 Change texturebinding to use the textureId directly rather than iconInde
+
+Build 1.4.5-6.4.0.385
+	LexManos: Fixed issue with default implementation of Beach plant type check
+	LexManos: Fixed custom soil checks for NetherStalk and Reeds
