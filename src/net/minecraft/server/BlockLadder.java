@@ -111,4 +111,11 @@ public class BlockLadder extends Block {
    public int a(Random var1) {
       return 1;
    }
+   
+   // Forge Hook
+   @Override
+   public boolean isLadder(World world, int x, int y, int z)
+   {
+	   return true;
+   }
 }

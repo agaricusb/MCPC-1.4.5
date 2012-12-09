@@ -299,4 +299,11 @@ public class BlockVine extends Block {
       }
 
    }
+   
+   // Forge Hook
+   @Override
+   public boolean isLadder(World var1, int var2, int var3, int var4)
+   {
+       return true;
+   }
 }
