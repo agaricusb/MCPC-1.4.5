@@ -15,11 +15,6 @@ import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
-import java.nio.file.DirectoryNotEmptyException;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
-import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -180,10 +175,6 @@ public class RelaunchLibraryManager
                     	            unmap(mappedFile);
                     	            // delete original guava 12 jar
                     	            libFile.delete(); 
-                            	} catch (NoSuchFileException x) {
-                            	    System.err.format("%s: no such" + " file or directory%n");
-                            	} catch (DirectoryNotEmptyException x) {
-                            	    System.err.format("%s not empty%n");
                             	} catch (IOException x) {
                             	    // File permission problems are caught here.
                             	    System.err.println(x);

@@ -1,12 +1,6 @@
 package net.minecraft.server;
 
-import net.minecraftforge.common.ChestGenHooks;
-import net.minecraftforge.common.DimensionManager;
-import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.event.world.WorldEvent.Save;
 import java.io.File;
-
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashSet;
@@ -15,6 +9,10 @@ import java.util.List;
 import java.util.Random;
 import java.util.Set;
 import java.util.TreeSet;
+
+import net.minecraftforge.common.DimensionManager;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.WorldEvent;
 
 // CraftBukkit start
 import org.bukkit.block.BlockState;
@@ -42,19 +40,12 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
     private int S = 0;
     public static final StructurePieceTreasure[] T = new StructurePieceTreasure[] { new StructurePieceTreasure(Item.STICK.id, 0, 1, 3, 10), new StructurePieceTreasure(Block.WOOD.id, 0, 1, 3, 10), new StructurePieceTreasure(Block.LOG.id, 0, 1, 3, 10), new StructurePieceTreasure(Item.STONE_AXE.id, 0, 1, 1, 3), new StructurePieceTreasure(Item.WOOD_AXE.id, 0, 1, 1, 5), new StructurePieceTreasure(Item.STONE_PICKAXE.id, 0, 1, 1, 3), new StructurePieceTreasure(Item.WOOD_PICKAXE.id, 0, 1, 1, 5), new StructurePieceTreasure(Item.APPLE.id, 0, 2, 3, 5), new StructurePieceTreasure(Item.BREAD.id, 0, 2, 3, 3)};
     private IntHashMap entitiesById;
-    protected Set doneChunks = new HashSet();
 
-    
-    
     // CraftBukkit start
     public final int dimension;
 
     public WorldServer(MinecraftServer minecraftserver, IDataManager idatamanager, String s, int i, WorldSettings worldsettings, MethodProfiler methodprofiler, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen) {
-        this(minecraftserver, idatamanager, s, i, worldsettings, methodprofiler, WorldProvider.byDimension(i), env, gen);
-    }
-    
-    public WorldServer(MinecraftServer minecraftserver, IDataManager idatamanager, String s, int i, WorldSettings worldsettings, MethodProfiler methodprofiler, WorldProvider wprovider, org.bukkit.World.Environment env, org.bukkit.generator.ChunkGenerator gen) {
-        super(idatamanager, s, worldsettings, wprovider, methodprofiler, gen, env);
+        super(idatamanager, s, worldsettings, WorldProvider.byDimension(env.getId()), methodprofiler, gen, env);
         this.dimension = i;
         this.pvpMode = minecraftserver.getPvP();
         // CraftBukkit end
@@ -158,6 +149,7 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
 
             if (!flag) {
                 long i = this.worldData.getDayTime() + 24000L;
+
                 this.worldData.setDayTime(i - i % 24000L);
                 this.d();
             }
@@ -232,8 +224,6 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
     }
 
     private void U() {
-    	// this.worldProvider.resetRainAndThunder(); -- forge
-    	
         // CraftBukkit start
         WeatherChangeEvent weather = new WeatherChangeEvent(this.getWorld(), false);
         this.getServer().getPluginManager().callEvent(weather);
@@ -498,7 +488,7 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
 
                     if (k == nextticklistentry.d && k > 0) {
                         try {
-                        Block.byId[k].b(this, nextticklistentry.a, nextticklistentry.b, nextticklistentry.c, this.random);
+                            Block.byId[k].b(this, nextticklistentry.a, nextticklistentry.b, nextticklistentry.c, this.random);
                         } catch (Throwable throwable) {
                             CrashReport crashreport = CrashReport.a(throwable, "Exception while ticking a block");
                             CrashReportSystemDetails crashreportsystemdetails = crashreport.a("Block being ticked");
@@ -509,7 +499,7 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
                                 l = this.getData(nextticklistentry.a, nextticklistentry.b, nextticklistentry.c);
                             } catch (Throwable throwable1) {
                                 l = -1;
-                    }
+                            }
 
                             CrashReportSystemDetails.a(crashreportsystemdetails, nextticklistentry.a, nextticklistentry.b, nextticklistentry.c, k, l);
                             throw new ReportedException(crashreport);
@@ -582,7 +572,7 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
         } else if (this.worldProvider instanceof WorldProviderTheEnd) {
             gen = new org.bukkit.craftbukkit.generator.SkyLandsChunkGenerator(this, this.getSeed());
         } else {
-        	gen = new org.bukkit.craftbukkit.generator.NormalChunkGenerator(this, this.getSeed());
+            gen = new org.bukkit.craftbukkit.generator.NormalChunkGenerator(this, this.getSeed());
         }
 
         this.chunkProviderServer = new ChunkProviderServer(this, ichunkloader, gen);
@@ -591,38 +581,21 @@ public class WorldServer extends World implements org.bukkit.BlockChangeDelegate
         return this.chunkProviderServer;
     }
 
-    /**
-     * get a list of tileEntity's
-     */
-    public List getTileEntities(int var1, int var2, int var3, int var4, int var5, int var6)
-    {
-        ArrayList var7 = new ArrayList();
+    public List getTileEntities(int i, int j, int k, int l, int i1, int j1) {
+        ArrayList arraylist = new ArrayList();
+        // CraftBukkit start - use iterator
+        Iterator iterator = this.tileEntityList.iterator();
 
-        for (int var8 = var1 >> 4; var8 <= var4 >> 4; ++var8)
-        {
-            for (int var9 = var3 >> 4; var9 <= var6 >> 4; ++var9)
-            {
-                Chunk var10 = this.getChunkAt(var8, var9);
+        while (iterator.hasNext()) {
+            TileEntity tileentity = (TileEntity) iterator.next();
+            // CraftBukkit end
 
-                if (var10 != null)
-                {
-                    Iterator var11 = var10.tileEntities.values().iterator();
-
-                    while (var11.hasNext())
-                    {
-                        Object var12 = var11.next();
-                        TileEntity var13 = (TileEntity)var12;
-
-                        if (!var13.r() && var13.x >= var1 && var13.y >= var2 && var13.z >= var3 && var13.x <= var4 && var13.y <= var5 && var13.z <= var6)
-                        {
-                            var7.add(var13);
-                        }
-                    }
-                }
+            if (tileentity.x >= i && tileentity.y >= j && tileentity.z >= k && tileentity.x < l && tileentity.y < i1 && tileentity.z < j1) {
+                arraylist.add(tileentity);
             }
         }
 
-        return var7;
+        return arraylist;
     }
 
     public boolean a(EntityHuman entityhuman, int i, int j, int k) {

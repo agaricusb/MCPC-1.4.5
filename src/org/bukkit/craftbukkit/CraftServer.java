@@ -132,6 +132,7 @@ import com.avaje.ebean.config.DataSourceConfig;
 import com.avaje.ebean.config.ServerConfig;
 import com.avaje.ebean.config.dbplatform.SQLitePlatform;
 import com.avaje.ebeaninternal.server.lib.sql.TransactionIsolation;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.MapMaker;
 
@@ -656,7 +657,6 @@ public final class CraftServer implements Server {
         if (creator == null) {
             throw new IllegalArgumentException("Creator may not be null");
         }
-
         String name = creator.name();
         ChunkGenerator generator = creator.generator();
         File folder = new File(getWorldContainer(), name);
@@ -694,10 +694,9 @@ public final class CraftServer implements Server {
             }
         } while(used);
         boolean hardcore = false;
-
         WorldServer internal = new WorldServer(console, new ServerNBTManager(getWorldContainer(), name, true), name, dimension, new WorldSettings(creator.seed(), EnumGamemode.a(getDefaultGameMode().getValue()), generateStructures, hardcore, type), console.methodProfiler, creator.environment(), generator);
-
-        DimensionManager.registerDimension(dimension, internal.worldProvider.dimension);
+        // Forge
+        DimensionManager.registerDimension(dimension, internal.worldProvider.dimension);       
         internal.worldProvider.setDimension(dimension); // re-set the dimension to a custom, so that mods work
         
         if (!(worlds.containsKey(name.toLowerCase()))) {

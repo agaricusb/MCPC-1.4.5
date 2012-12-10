@@ -1,9 +1,6 @@
 package net.minecraft.server;
 
 import cpw.mods.fml.common.network.FMLNetworkHandler;
-import cpw.mods.fml.common.registry.EntityRegistry;
-
-import java.io.IOException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -378,8 +375,12 @@ public class EntityTrackerEntry {
     }
 
     public void scanPlayers(List list) {
-        for (int i = 0; i < list.size(); ++i) {
-            this.updatePlayer((EntityPlayer) list.get(i));
+        Iterator iterator = list.iterator();
+
+        while (iterator.hasNext()) {
+            EntityHuman entityhuman = (EntityHuman) iterator.next();
+
+            this.updatePlayer((EntityPlayer) entityhuman);
         }
     }
 
@@ -390,20 +391,13 @@ public class EntityTrackerEntry {
             return null;
             // CraftBukkit end
         }
-        Packet var1 = null;
-        try
-        {
-        	var1 = FMLNetworkHandler.getEntitySpawningPacket(this.tracker);
-        }
-        catch (Throwable throwable) {
-        	CrashReport crashreport = CrashReport.a(throwable, "FML getEntitySpawningPacket");
-        	throw new ReportedException(crashreport);
-        }
         
+        Packet var1 = FMLNetworkHandler.getEntitySpawningPacket(this.tracker);
         if (var1 != null)
+        {
         	return var1;
-        
-        if (this.tracker instanceof EntityItem) {
+        }
+        else if (this.tracker instanceof EntityItem) {
             EntityItem entityitem = (EntityItem) this.tracker;
             Packet21PickupSpawn entityminecart0 = new Packet21PickupSpawn(entityitem);
 
