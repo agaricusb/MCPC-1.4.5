@@ -5,11 +5,11 @@ import java.util.Map;
 
 import org.objectweb.asm.Type;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import cpw.mods.fml.common.discovery.asm.ASMModParser.AnnotationType;
+import mcpc.com.google.common.base.Objects;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Maps;
 
 public class ModAnnotation
 {

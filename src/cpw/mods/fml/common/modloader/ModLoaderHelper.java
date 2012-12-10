@@ -19,9 +19,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.Callable;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Maps;
 
 import net.minecraft.server.BaseMod;
 import net.minecraft.server.Container;
@@ -50,6 +47,9 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry.EntityRegistration;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
 import cpw.mods.fml.common.registry.VillagerRegistry;
+import mcpc.com.google.common.collect.ArrayListMultimap;
+import mcpc.com.google.common.collect.ListMultimap;
+import mcpc.com.google.common.collect.Maps;
 
 /**
  * @author cpw

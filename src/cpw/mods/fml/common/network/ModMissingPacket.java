@@ -2,12 +2,6 @@ package cpw.mods.fml.common.network;
 
 import java.util.List;
 
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableList.Builder;
-import com.google.common.collect.Lists;
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
@@ -15,6 +9,12 @@ import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.DefaultArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionRange;
+import mcpc.com.google.common.collect.ImmutableList;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.ImmutableList.Builder;
+import mcpc.com.google.common.io.ByteArrayDataInput;
+import mcpc.com.google.common.io.ByteArrayDataOutput;
+import mcpc.com.google.common.io.ByteStreams;
 
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.INetworkManager;

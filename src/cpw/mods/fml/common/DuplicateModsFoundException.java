@@ -3,7 +3,7 @@ package cpw.mods.fml.common;
 import java.io.File;
 import java.util.List;
 
-import com.google.common.collect.SetMultimap;
+import mcpc.com.google.common.collect.SetMultimap;
 
 public class DuplicateModsFoundException extends LoaderException {
 

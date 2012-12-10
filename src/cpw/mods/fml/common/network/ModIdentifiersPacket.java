@@ -9,10 +9,11 @@ import java.util.Map.Entry;
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.INetworkManager;
 
-import com.google.common.collect.Maps;
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
+
+import mcpc.com.google.common.collect.Maps;
+import mcpc.com.google.common.io.ByteArrayDataInput;
+import mcpc.com.google.common.io.ByteArrayDataOutput;
+import mcpc.com.google.common.io.ByteStreams;
 
 public class ModIdentifiersPacket extends FMLPacket
 {

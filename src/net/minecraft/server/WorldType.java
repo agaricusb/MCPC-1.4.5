@@ -1,9 +1,10 @@
 package net.minecraft.server;
 
-import com.google.common.collect.ObjectArrays;
-import com.google.common.collect.Sets;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
+import mcpc.com.google.common.collect.ObjectArrays;
+import mcpc.com.google.common.collect.Sets;
+
 import java.util.Arrays;
 import java.util.LinkedHashSet;
 import java.util.Random;

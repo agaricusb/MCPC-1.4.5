@@ -15,15 +15,15 @@ import net.minecraft.server.INetworkManager;
 import net.minecraft.server.Packet1Login;
 import net.minecraft.server.Packet250CustomPayload;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Maps;
+import mcpc.com.google.common.io.ByteArrayDataInput;
+import mcpc.com.google.common.io.ByteArrayDataOutput;
+import mcpc.com.google.common.io.ByteStreams;
 
 public class ModListResponsePacket extends FMLPacket
 {

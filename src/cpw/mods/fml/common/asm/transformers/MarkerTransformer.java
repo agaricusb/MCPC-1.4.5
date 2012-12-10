@@ -18,16 +18,16 @@ import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.tree.ClassNode;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Splitter;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.ListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.io.LineProcessor;
-import com.google.common.io.Resources;
 
 import cpw.mods.fml.relauncher.IClassTransformer;
+import mcpc.com.google.common.base.Charsets;
+import mcpc.com.google.common.base.Splitter;
+import mcpc.com.google.common.collect.ArrayListMultimap;
+import mcpc.com.google.common.collect.Iterables;
+import mcpc.com.google.common.collect.ListMultimap;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.io.LineProcessor;
+import mcpc.com.google.common.io.Resources;
 
 public class MarkerTransformer implements IClassTransformer
 {

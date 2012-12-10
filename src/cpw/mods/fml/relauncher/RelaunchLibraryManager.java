@@ -15,6 +15,11 @@ import java.nio.ByteBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.nio.channels.FileChannel.MapMode;
+import java.nio.file.DirectoryNotEmptyException;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.NoSuchFileException;
+import java.nio.file.Path;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -24,6 +29,8 @@ import java.util.Map;
 import java.util.jar.Attributes;
 import java.util.jar.JarFile;
 import java.util.logging.Level;
+
+import sun.nio.ch.DirectBuffer;
 
 import cpw.mods.fml.relauncher.IFMLLoadingPlugin.TransformerExclusions;
 
@@ -124,12 +131,21 @@ public class RelaunchLibraryManager
                     String targFileName = libName.lastIndexOf('/')>=0 ? libName.substring(libName.lastIndexOf('/')) : libName;
                     String checksum = lib.getHashes()[i];
                     File libFile = new File(libDir, targFileName);
+                    
                     if (!libFile.exists())
                     {
                         try
                         {
-                            downloadFile(libFile, lib.getRootURL(), libName, checksum);
-                            download = true;
+                        	// MCPC
+                        	if (libName == "guava-12.0.1.jar")
+                        	{
+                        		downloadFile(libFile, lib.getMCPCRootURL(), libName, checksum);
+                        		download = true;
+                        	}
+                        	else {
+                        		downloadFile(libFile, lib.getRootURL(), libName, checksum);
+                        		download = true;
+                        	}
                         }
                         catch (Throwable e)
                         {
@@ -153,8 +169,31 @@ public class RelaunchLibraryManager
                             MappedByteBuffer mappedFile = chan.map(MapMode.READ_ONLY, 0, libFile.length());
                             String fileChecksum = generateChecksum(mappedFile);
                             fis.close();
+                            
+                            // MCPC
+                            // check if original guava 12 jar exists and if so force a redownload
+                            if (fileChecksum.equals("b8e78b9af7bf45900e14c6f958486b6ca682195f"))
+                            {
+                            	try {
+                            		// Close channel and unmap the file currently being read
+                    	            chan.close();
+                    	            unmap(mappedFile);
+                    	            // delete original guava 12 jar
+                    	            libFile.delete(); 
+                            	} catch (NoSuchFileException x) {
+                            	    System.err.format("%s: no such" + " file or directory%n");
+                            	} catch (DirectoryNotEmptyException x) {
+                            	    System.err.format("%s not empty%n");
+                            	} catch (IOException x) {
+                            	    // File permission problems are caught here.
+                            	    System.err.println(x);
+                            	}
+                            	// proceed to download the MCPC guava 12 jar
+                            	downloadFile(libFile, lib.getMCPCRootURL(), libName, checksum);
+                        		download = true;
+                            }
                             // bad checksum and I did not download this file
-                            if (!checksum.equals(fileChecksum))
+                            else if (!checksum.equals(fileChecksum))
                             {
                                 caughtErrors.add(new RuntimeException(String.format("The file %s was found in your lib directory and has an invalid checksum %s (expecting %s) - it is unlikely to be the correct download, please move it out of the way and try again.", libName, fileChecksum, checksum)));
                                 continue;
@@ -576,5 +615,11 @@ public class RelaunchLibraryManager
         {
             return null;
         }
+    }
+    
+    public static void unmap(MappedByteBuffer buffer)
+    {
+       sun.misc.Cleaner cleaner = ((DirectBuffer) buffer).cleaner();
+       cleaner.clean();
     }
 }

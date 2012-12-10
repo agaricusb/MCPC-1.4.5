@@ -4,14 +4,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.HashMultimap;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableSetMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Multimaps;
-import com.google.common.collect.SetMultimap;
+import mcpc.com.google.common.base.Predicate;
+import mcpc.com.google.common.collect.HashMultimap;
+import mcpc.com.google.common.collect.ImmutableMap;
+import mcpc.com.google.common.collect.ImmutableSetMultimap;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Multimap;
+import mcpc.com.google.common.collect.Multimaps;
+import mcpc.com.google.common.collect.SetMultimap;
 
 import cpw.mods.fml.common.ModContainer;
 

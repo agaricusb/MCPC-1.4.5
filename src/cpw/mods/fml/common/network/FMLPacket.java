@@ -6,11 +6,11 @@ import java.util.logging.Level;
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.INetworkManager;
 
-import com.google.common.base.Throwables;
-import com.google.common.primitives.Bytes;
-import com.google.common.primitives.UnsignedBytes;
 
 import cpw.mods.fml.common.FMLLog;
+import mcpc.com.google.common.base.Throwables;
+import mcpc.com.google.common.primitives.Bytes;
+import mcpc.com.google.common.primitives.UnsignedBytes;
 
 public abstract class FMLPacket
 {

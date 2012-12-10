@@ -8,8 +8,6 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.regex.Matcher;
 
-import com.google.common.base.Throwables;
-import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.LoaderException;
@@ -17,6 +15,8 @@ import cpw.mods.fml.common.MetadataCollection;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.ModContainerFactory;
 import cpw.mods.fml.common.discovery.asm.ASMModParser;
+import mcpc.com.google.common.base.Throwables;
+import mcpc.com.google.common.collect.Lists;
 
 public class DirectoryDiscoverer implements ITypeDiscoverer
 {

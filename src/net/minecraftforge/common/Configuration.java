@@ -16,13 +16,13 @@ import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Splitter;
-import com.google.common.collect.Maps;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.relauncher.FMLInjectionData;
+import mcpc.com.google.common.base.CharMatcher;
+import mcpc.com.google.common.base.Splitter;
+import mcpc.com.google.common.collect.Maps;
 
 import net.minecraft.server.Block;
 import net.minecraft.server.Item;

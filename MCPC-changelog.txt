@@ -1,5 +1,18 @@
 Changelog:
 
+Build MCPC-1.4.5-beta-2
+	blood
+		Repackaged guava 12 to fix compatibility issue with Bukkit
+		
+		In past releases of MCPC, many bukkit plugins have not worked correctly
+		with MCPC since bukkit still uses guava 10 while Forge uses guava 12. 
+		I have repackaged the guava 12 library to use a different package
+		name to avoid conflicts. Forge will now use mcpc-guava-12.0.1.jar. 
+		This should solve all the bukkit plugin issues with MCPC such as 
+		Multiverse and Essentials which still use guava 10.
+
+		Disabled jline so users can run server without '--nojline'
+
 Build MCPC-1.4.5-beta-1
 	blood
 		initial release. Still much work to be done but it is guaranteed to work with MoCreatures 4.3.1

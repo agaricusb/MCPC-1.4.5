@@ -2,7 +2,7 @@ package cpw.mods.fml.common.discovery;
 
 import java.util.List;
 
-import com.google.common.base.Throwables;
+import mcpc.com.google.common.base.Throwables;
 
 import cpw.mods.fml.common.ModContainer;
 

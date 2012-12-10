@@ -4,9 +4,9 @@ import net.minecraft.server.EntityHuman;
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.INetworkManager;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
+import mcpc.com.google.common.io.ByteArrayDataInput;
+import mcpc.com.google.common.io.ByteArrayDataOutput;
+import mcpc.com.google.common.io.ByteStreams;
 
 public class OpenGuiPacket extends FMLPacket
 {

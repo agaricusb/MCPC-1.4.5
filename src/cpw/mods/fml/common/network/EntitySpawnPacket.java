@@ -15,9 +15,6 @@ import net.minecraft.server.MathHelper;
 import net.minecraft.server.NetHandler;
 import net.minecraft.server.INetworkManager;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
-import com.google.common.io.ByteStreams;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -26,6 +23,9 @@ import cpw.mods.fml.common.registry.EntityRegistry;
 import cpw.mods.fml.common.registry.EntityRegistry.EntityRegistration;
 import cpw.mods.fml.common.registry.IEntityAdditionalSpawnData;
 import cpw.mods.fml.common.registry.IThrowableEntity;
+import mcpc.com.google.common.io.ByteArrayDataInput;
+import mcpc.com.google.common.io.ByteArrayDataOutput;
+import mcpc.com.google.common.io.ByteStreams;
 
 public class EntitySpawnPacket extends FMLPacket
 {

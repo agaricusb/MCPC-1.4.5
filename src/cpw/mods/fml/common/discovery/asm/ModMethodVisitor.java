@@ -6,7 +6,7 @@ import org.objectweb.asm.Label;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
-import com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Lists;
 
 public class ModMethodVisitor extends MethodVisitor
 {

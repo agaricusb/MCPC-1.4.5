@@ -12,13 +12,13 @@ import net.minecraft.server.BaseMod;
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.Type;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.LoaderException;
 import cpw.mods.fml.common.discovery.ASMDataTable;
 import cpw.mods.fml.common.discovery.ModCandidate;
+import mcpc.com.google.common.base.Objects;
+import mcpc.com.google.common.collect.Lists;
 
 public class ASMModParser
 {

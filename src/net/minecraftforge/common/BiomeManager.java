@@ -12,7 +12,7 @@ import net.minecraft.server.WorldGenStronghold;
 import net.minecraft.server.WorldGenVillage;
 import net.minecraft.server.WorldChunkManager;
 
-import com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Lists;
 
 public class BiomeManager
 {

@@ -34,9 +34,9 @@ import net.minecraft.server.ServerConfigurationManagerAbstract;
 import net.minecraft.server.World;
 import net.minecraft.server.WorldType;
 
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.hash.Hashing;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Maps;
+import mcpc.com.google.common.hash.Hashing;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;

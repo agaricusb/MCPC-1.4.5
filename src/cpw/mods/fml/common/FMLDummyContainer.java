@@ -27,9 +27,10 @@ import net.minecraft.server.NBTTagString;
 import net.minecraft.server.WorldData;
 import net.minecraft.server.WorldNBTStorage;
 
-import com.google.common.collect.MapMaker;
-import com.google.common.collect.Sets;
-import com.google.common.eventbus.EventBus;
+
+import mcpc.com.google.common.collect.MapMaker;
+import mcpc.com.google.common.collect.Sets;
+import mcpc.com.google.common.eventbus.EventBus;
 
 /**
  * @author cpw

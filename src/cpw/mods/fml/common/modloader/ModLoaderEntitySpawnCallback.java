@@ -2,10 +2,10 @@ package cpw.mods.fml.common.modloader;
 
 import java.util.concurrent.Callable;
 
-import com.google.common.base.Function;
 
 import cpw.mods.fml.common.network.EntitySpawnPacket;
 import cpw.mods.fml.common.registry.EntityRegistry.EntityRegistration;
+import mcpc.com.google.common.base.Function;
 
 import net.minecraft.server.Entity;
 

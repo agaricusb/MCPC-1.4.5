@@ -27,4 +27,6 @@ public interface ILibrarySet
      * @return the root URL format string from which this library set can be obtained
      */
     String getRootURL();
+    // MCPC
+    String getMCPCRootURL();
 }

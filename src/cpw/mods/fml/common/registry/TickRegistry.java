@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.PriorityQueue;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.google.common.collect.Queues;
+import mcpc.com.google.common.collect.Queues;
 
 import cpw.mods.fml.common.IScheduledTickHandler;
 import cpw.mods.fml.common.ITickHandler;

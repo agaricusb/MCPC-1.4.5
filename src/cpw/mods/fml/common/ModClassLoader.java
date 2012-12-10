@@ -21,12 +21,12 @@ import java.net.URLClassLoader;
 import java.util.List;
 import java.util.logging.Level;
 
-import com.google.common.collect.ImmutableList;
 
 import cpw.mods.fml.common.asm.ASMTransformer;
 import cpw.mods.fml.common.asm.transformers.AccessTransformer;
 import cpw.mods.fml.common.modloader.BaseModProxy;
 import cpw.mods.fml.relauncher.RelaunchClassLoader;
+import mcpc.com.google.common.collect.ImmutableList;
 
 /**
  * A simple delegating class loader used to load mods into the system

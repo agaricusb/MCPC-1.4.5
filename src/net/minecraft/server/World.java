@@ -1,6 +1,8 @@
 package net.minecraft.server;
 
 import ee.lutsu.alpha.minecraft.*;
+import mcpc.com.google.common.collect.ImmutableSetMultimap;
+
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Collection;
@@ -26,7 +28,6 @@ import org.bukkit.event.weather.WeatherChangeEvent;
 import org.bukkit.event.weather.ThunderChangeEvent;
 // CraftBukkit end
 
-import com.google.common.collect.ImmutableSetMultimap;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import net.minecraftforge.common.ForgeChunkManager;

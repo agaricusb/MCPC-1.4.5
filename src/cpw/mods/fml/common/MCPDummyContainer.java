@@ -1,6 +1,6 @@
 package cpw.mods.fml.common;
 
-import com.google.common.eventbus.EventBus;
+import mcpc.com.google.common.eventbus.EventBus;
 
 public class MCPDummyContainer extends DummyModContainer {
 	public MCPDummyContainer(ModMetadata metadata) {

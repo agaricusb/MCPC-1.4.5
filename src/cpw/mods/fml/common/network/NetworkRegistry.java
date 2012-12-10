@@ -20,16 +20,6 @@ import net.minecraft.server.Packet250CustomPayload;
 import net.minecraft.server.Packet3Chat;
 import net.minecraft.server.World;
 
-import com.google.common.base.Charsets;
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.base.Strings;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
@@ -37,6 +27,16 @@ import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.ModContainer;
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.network.FMLPacket.Type;
+import mcpc.com.google.common.base.Charsets;
+import mcpc.com.google.common.base.Joiner;
+import mcpc.com.google.common.base.Splitter;
+import mcpc.com.google.common.base.Strings;
+import mcpc.com.google.common.collect.ArrayListMultimap;
+import mcpc.com.google.common.collect.Iterables;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Maps;
+import mcpc.com.google.common.collect.Multimap;
+import mcpc.com.google.common.collect.Sets;
 
 /**
  * @author cpw

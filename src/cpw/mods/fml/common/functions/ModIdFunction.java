@@ -1,8 +1,8 @@
 package cpw.mods.fml.common.functions;
 
-import com.google.common.base.Function;
 
 import cpw.mods.fml.common.ModContainer;
+import mcpc.com.google.common.base.Function;
 
 public final class ModIdFunction implements Function<ModContainer, String>
 {

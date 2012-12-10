@@ -3,18 +3,16 @@ package net.minecraftforge.common;
 import java.util.*;
 import java.util.Map.Entry;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.ListMultimap;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.Loader;
+import mcpc.com.google.common.collect.ArrayListMultimap;
+import mcpc.com.google.common.collect.ListMultimap;
 
 import net.minecraft.server.*;
 import net.minecraftforge.event.ForgeEventFactory;
 import net.minecraftforge.event.entity.item.ItemTossEvent;
 import net.minecraftforge.event.entity.living.*;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingJumpEvent;
-import net.minecraftforge.event.entity.living.LivingEvent.LivingUpdateEvent;
 import net.minecraftforge.event.entity.living.LivingEvent.*;
 
 public class ForgeHooks

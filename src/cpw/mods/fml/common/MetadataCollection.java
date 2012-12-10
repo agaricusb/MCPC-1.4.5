@@ -10,8 +10,9 @@ import argo.jdom.JsonNode;
 import argo.jdom.JsonRootNode;
 import argo.saj.InvalidSyntaxException;
 
-import com.google.common.base.Throwables;
-import com.google.common.collect.Maps;
+
+import mcpc.com.google.common.base.Throwables;
+import mcpc.com.google.common.collect.Maps;
 
 public class MetadataCollection
 {

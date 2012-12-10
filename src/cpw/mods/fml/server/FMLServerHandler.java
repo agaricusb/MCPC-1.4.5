@@ -20,7 +20,6 @@ import net.minecraft.server.NetHandler;
 import net.minecraft.server.Packet;
 import net.minecraft.server.Packet131ItemData;
 import net.minecraft.server.World;
-import com.google.common.collect.ImmutableList;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.IFMLSidedHandler;
 import cpw.mods.fml.common.Loader;
@@ -31,6 +30,7 @@ import cpw.mods.fml.common.network.EntitySpawnPacket;
 import cpw.mods.fml.common.network.ModMissingPacket;
 import cpw.mods.fml.common.registry.EntityRegistry.EntityRegistration;
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import mcpc.com.google.common.collect.ImmutableList;
 
 /**
  * Handles primary communication from hooked code into the system

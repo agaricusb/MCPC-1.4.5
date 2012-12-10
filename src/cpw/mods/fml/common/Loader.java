@@ -17,6 +17,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 import java.net.MalformedURLException;
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
@@ -29,27 +30,6 @@ import java.util.logging.Level;
 import net.minecraft.server.CrashReport;
 import net.minecraft.server.CrashReportVersion;
 
-import com.google.common.base.CharMatcher;
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.base.Splitter;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.HashBiMap;
-import com.google.common.collect.ImmutableList;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMultiset;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.LinkedHashMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
-import com.google.common.collect.SetMultimap;
-import com.google.common.collect.Sets;
-import com.google.common.collect.Multiset.Entry;
-import com.google.common.collect.Multisets;
-import com.google.common.collect.Ordering;
-import com.google.common.collect.Sets.SetView;
-import com.google.common.collect.TreeMultimap;
 
 import cpw.mods.fml.common.LoaderState.ModState;
 import cpw.mods.fml.common.discovery.ModDiscoverer;
@@ -62,6 +42,29 @@ import cpw.mods.fml.common.toposort.ModSortingException;
 import cpw.mods.fml.common.toposort.TopologicalSort;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionParser;
+import mcpc.com.google.common.base.CharMatcher;
+import mcpc.com.google.common.base.Function;
+import mcpc.com.google.common.base.Joiner;
+import mcpc.com.google.common.base.Splitter;
+import mcpc.com.google.common.collect.ArrayListMultimap;
+import mcpc.com.google.common.collect.BiMap;
+import mcpc.com.google.common.collect.HashBiMap;
+import mcpc.com.google.common.collect.ImmutableList;
+import mcpc.com.google.common.collect.ImmutableMap;
+import mcpc.com.google.common.collect.ImmutableMultiset;
+import mcpc.com.google.common.collect.Iterables;
+import mcpc.com.google.common.collect.LinkedHashMultimap;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Maps;
+import mcpc.com.google.common.collect.Multiset;
+import mcpc.com.google.common.collect.Multisets;
+import mcpc.com.google.common.collect.Ordering;
+import mcpc.com.google.common.collect.SetMultimap;
+import mcpc.com.google.common.collect.Sets;
+import mcpc.com.google.common.collect.TreeMultimap;
+import mcpc.com.google.common.collect.Multiset.Entry;
+import mcpc.com.google.common.collect.Sets.SetView;
+import mcpc.com.google.common.primitives.Ints;
 
 /**
  * The loader class performs the actual loading of the mod code from disk.
@@ -360,14 +363,22 @@ public class Loader
             }
         }
 
-        ImmutableMultiset<ModContainer> duplist = Multisets.copyHighestCountFirst(dupsearch.keys());
-        SetMultimap<ModContainer, File> dupes = LinkedHashMultimap.create();
+       // ImmutableMultiset<ModContainer> duplist = Multisets.copyHighestCountFirst(dupsearch.keys());
+        /* SetMultimap<ModContainer, File> dupes = LinkedHashMultimap.create();
         for (Entry<ModContainer> e : duplist.entrySet())
         {
             if (e.getCount() > 1)
             {
                 FMLLog.severe("Found a duplicate mod %s at %s", e.getElement().getModId(), dupsearch.get(e.getElement()));
                 dupes.putAll(e.getElement(),dupsearch.get(e.getElement()));
+            }
+        }*/
+        SetMultimap<ModContainer, File> dupes = LinkedHashMultimap.create();
+        for(final Entry<ModContainer> entry : getEntriesSortedByFrequency(dupsearch.keys(), false)){
+            if (entry.getCount() > 1)
+            {
+                FMLLog.severe("Found a duplicate mod %s at %s", entry.getElement().getModId(), dupsearch.get(entry.getElement()));
+                dupes.putAll(entry.getElement(),dupsearch.get(entry.getElement()));
             }
         }
         if (!dupes.isEmpty())
@@ -741,5 +752,29 @@ public class Loader
 
 	public String getMCPVersionString() {
 		return String.format("MCP v%s", mcpversion);
+	}
+	
+	private enum EntryComp implements Comparator<Multiset.Entry<?>>{
+	    DESCENDING{
+	        @Override
+	        public int compare(final Entry<?> a, final Entry<?> b){
+	            return Ints.compare(b.getCount(), a.getCount());
+	        }
+	    },
+	    ASCENDING{
+	        @Override
+	        public int compare(final Entry<?> a, final Entry<?> b){
+	            return Ints.compare(a.getCount(), b.getCount());
+	        }
+	    },
+	}
+
+	public static <E> List<Entry<E>> getEntriesSortedByFrequency(
+	    final Multiset<E> ms, final boolean ascending){
+	    final List<Entry<E>> entryList = Lists.newArrayList(ms.entrySet());
+	    Collections.sort(entryList, ascending
+	        ? EntryComp.ASCENDING
+	        : EntryComp.DESCENDING);
+	    return entryList;
 	}
 }

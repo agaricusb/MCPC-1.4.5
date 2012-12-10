@@ -1,9 +1,9 @@
 package cpw.mods.fml.common.event;
 
-import com.google.common.base.Throwables;
 
 import cpw.mods.fml.common.Loader;
 import cpw.mods.fml.common.LoaderState.ModState;
+import mcpc.com.google.common.base.Throwables;
 
 public class FMLPostInitializationEvent extends FMLStateEvent
 {

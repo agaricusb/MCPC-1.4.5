@@ -27,17 +27,17 @@ import java.util.logging.Level;
 import argo.jdom.JsonNode;
 import argo.jdom.JsonStringNode;
 
-import com.google.common.base.Function;
-import com.google.common.base.Joiner;
-import com.google.common.base.Objects;
-import com.google.common.base.Optional;
-import com.google.common.base.Strings;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Maps;
 
 import cpw.mods.fml.common.functions.ModNameFunction;
 import cpw.mods.fml.common.versioning.ArtifactVersion;
 import cpw.mods.fml.common.versioning.VersionParser;
+import mcpc.com.google.common.base.Function;
+import mcpc.com.google.common.base.Joiner;
+import mcpc.com.google.common.base.Objects;
+import mcpc.com.google.common.base.Optional;
+import mcpc.com.google.common.base.Strings;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Maps;
 
 /**
  * @author cpw

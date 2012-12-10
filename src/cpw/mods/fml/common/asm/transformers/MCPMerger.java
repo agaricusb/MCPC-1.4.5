@@ -31,12 +31,12 @@ import org.objectweb.asm.tree.ClassNode;
 import org.objectweb.asm.tree.FieldNode;
 import org.objectweb.asm.tree.MethodNode;
 
-import com.google.common.base.Objects;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Sets;
 
 import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
+import mcpc.com.google.common.base.Objects;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Sets;
 
 public class MCPMerger
 {

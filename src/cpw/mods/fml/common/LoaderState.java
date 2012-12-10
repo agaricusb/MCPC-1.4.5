@@ -1,6 +1,5 @@
 package cpw.mods.fml.common;
 
-import com.google.common.base.Throwables;
 
 import cpw.mods.fml.common.event.FMLConstructionEvent;
 import cpw.mods.fml.common.event.FMLEvent;
@@ -12,6 +11,7 @@ import cpw.mods.fml.common.event.FMLServerStartedEvent;
 import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 import cpw.mods.fml.common.event.FMLStateEvent;
+import mcpc.com.google.common.base.Throwables;
 
 /**
  * The state enum used to help track state progression for the loader

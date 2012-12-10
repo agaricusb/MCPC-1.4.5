@@ -27,7 +27,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import com.google.common.base.Joiner;
+import mcpc.com.google.common.base.Joiner;
 
 /**
  * Construct a version range from a specification.

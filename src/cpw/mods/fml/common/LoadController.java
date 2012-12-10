@@ -6,23 +6,23 @@ import java.util.Map;
 import java.util.Map.Entry;
 import java.util.logging.Level;
 
-import com.google.common.base.Joiner;
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.BiMap;
-import com.google.common.collect.ImmutableBiMap;
-import com.google.common.collect.ImmutableMap;
-import com.google.common.collect.ImmutableMap.Builder;
-import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 
 import cpw.mods.fml.common.LoaderState.ModState;
 import cpw.mods.fml.common.event.FMLEvent;
 import cpw.mods.fml.common.event.FMLLoadEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLStateEvent;
+import mcpc.com.google.common.base.Joiner;
+import mcpc.com.google.common.collect.ArrayListMultimap;
+import mcpc.com.google.common.collect.BiMap;
+import mcpc.com.google.common.collect.ImmutableBiMap;
+import mcpc.com.google.common.collect.ImmutableMap;
+import mcpc.com.google.common.collect.Iterables;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Multimap;
+import mcpc.com.google.common.collect.ImmutableMap.Builder;
+import mcpc.com.google.common.eventbus.EventBus;
+import mcpc.com.google.common.eventbus.Subscribe;
 
 public class LoadController
 {

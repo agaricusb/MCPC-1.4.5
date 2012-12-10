@@ -19,10 +19,6 @@ import net.minecraft.server.TileEntity;
 import net.minecraft.server.World;
 import net.minecraft.server.WorldType;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Lists;
-import com.google.common.collect.Multimap;
-import com.google.common.collect.Sets;
 
 import cpw.mods.fml.common.FMLLog;
 import cpw.mods.fml.common.ICraftingHandler;
@@ -37,6 +33,10 @@ import cpw.mods.fml.common.LoaderException;
 import cpw.mods.fml.common.LoaderState;
 import cpw.mods.fml.common.Mod.Block;
 import cpw.mods.fml.common.ModContainer;
+import mcpc.com.google.common.collect.ArrayListMultimap;
+import mcpc.com.google.common.collect.Lists;
+import mcpc.com.google.common.collect.Multimap;
+import mcpc.com.google.common.collect.Sets;
 
 public class GameRegistry
 {

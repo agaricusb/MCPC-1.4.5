@@ -1,7 +1,7 @@
 package cpw.mods.fml.common.registry;
 
-import com.google.common.io.ByteArrayDataInput;
-import com.google.common.io.ByteArrayDataOutput;
+import mcpc.com.google.common.io.ByteArrayDataInput;
+import mcpc.com.google.common.io.ByteArrayDataOutput;
 
 /**
  * A interface for Entities that need extra information to be communicated

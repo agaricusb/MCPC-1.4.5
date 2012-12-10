@@ -7,7 +7,7 @@ import net.minecraft.server.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event;
 
-import com.google.common.collect.ImmutableMap;
+import mcpc.com.google.common.collect.ImmutableMap;
 
 /**
  * When creating liquids you should register them with this class.

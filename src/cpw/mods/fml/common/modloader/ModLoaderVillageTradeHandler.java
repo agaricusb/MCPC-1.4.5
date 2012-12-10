@@ -3,7 +3,6 @@ package cpw.mods.fml.common.modloader;
 import java.util.List;
 import java.util.Random;
 
-import com.google.common.collect.Lists;
 
 import net.minecraft.server.EntityVillager;
 import net.minecraft.server.Item;
@@ -11,6 +10,7 @@ import net.minecraft.server.MerchantRecipeList;
 import net.minecraft.server.TradeEntry;
 import cpw.mods.fml.common.registry.VillagerRegistry;
 import cpw.mods.fml.common.registry.VillagerRegistry.IVillageTradeHandler;
+import mcpc.com.google.common.collect.Lists;
 
 public class ModLoaderVillageTradeHandler implements IVillageTradeHandler
 {

@@ -2,9 +2,9 @@ package cpw.mods.fml.common;
 
 import java.util.Set;
 
-import com.google.common.collect.Sets.SetView;
 
 import cpw.mods.fml.common.versioning.ArtifactVersion;
+import mcpc.com.google.common.collect.Sets.SetView;
 
 public class MissingModsException extends RuntimeException
 {

@@ -9,8 +9,6 @@ import net.minecraft.server.NBTTagCompound;
 import net.minecraft.server.WorldNBTStorage;
 import net.minecraft.server.WorldData;
 
-import com.google.common.eventbus.EventBus;
-import com.google.common.eventbus.Subscribe;
 
 import cpw.mods.fml.common.DummyModContainer;
 import cpw.mods.fml.common.LoadController;
@@ -19,6 +17,8 @@ import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.WorldAccessContainer;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import mcpc.com.google.common.eventbus.EventBus;
+import mcpc.com.google.common.eventbus.Subscribe;
 
 import static net.minecraftforge.common.ForgeVersion.*;
 
