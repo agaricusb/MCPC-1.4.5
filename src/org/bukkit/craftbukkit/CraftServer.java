@@ -696,8 +696,7 @@ public final class CraftServer implements Server {
         boolean hardcore = false;
         WorldServer internal = new WorldServer(console, new ServerNBTManager(getWorldContainer(), name, true), name, dimension, new WorldSettings(creator.seed(), EnumGamemode.a(getDefaultGameMode().getValue()), generateStructures, hardcore, type), console.methodProfiler, creator.environment(), generator);
         // Forge
-        DimensionManager.registerDimension(dimension, internal.worldProvider.dimension);       
-        internal.worldProvider.setDimension(dimension); // re-set the dimension to a custom, so that mods work
+        DimensionManager.registerDimension(dimension, internal.worldProvider.dimension); 
         
         if (!(worlds.containsKey(name.toLowerCase()))) {
             return null;
