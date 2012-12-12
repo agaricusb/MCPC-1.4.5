@@ -264,8 +264,7 @@ public class RelaunchLibraryManager
             {
                 for (String xformClass : plug.getASMTransformerClass())
                 {
-                	System.out.println("not registering transformer "+xformClass+", registered="+actualClassLoader.getTransformers().size());
-                    //actualClassLoader.registerTransformer(xformClass);
+                    actualClassLoader.registerTransformer(xformClass);
                 }
             }
         }
