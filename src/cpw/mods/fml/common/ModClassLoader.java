@@ -83,6 +83,7 @@ public class ModClassLoader extends URLClassLoader
     public Class<? extends BaseModProxy> loadBaseModClass(String modClazzName) throws Exception
     {
         AccessTransformer transformer = (AccessTransformer)mainClassLoader.getTransformers().get(0);
+        System.out.println("ModClassLoader ensurePublicAccessFor "+modClazzName);
         transformer.ensurePublicAccessFor(modClazzName);
         return (Class<? extends BaseModProxy>) Class.forName(modClazzName, true, this);
     }
