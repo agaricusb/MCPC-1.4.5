@@ -139,7 +139,7 @@ import com.google.common.collect.MapMaker;
 import org.bukkit.craftbukkit.libs.jline.console.ConsoleReader;
 
 public final class CraftServer implements Server {
-    private final String serverName = "CraftBukkit";
+    private final String serverName = "CraftBukkit-CPCM";
     private final String serverVersion;
     private final String bukkitVersion = Versioning.getBukkitVersion();
     private final ServicesManager servicesManager = new SimpleServicesManager();

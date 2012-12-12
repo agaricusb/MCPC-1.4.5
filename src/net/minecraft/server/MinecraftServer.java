@@ -824,7 +824,7 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
     }
 
     public String getServerModName() {
-        return "craftbukkit"; // CraftBukkit - cb > vanilla!
+        return "craftbukkit-cpcm"; // CraftBukkit - cb > vanilla! // CPCM - add brandj
     }
 
     public CrashReport b(CrashReport crashreport) {
