@@ -59,7 +59,7 @@ public class WorldChunkManager
     /**
      * Returns the BiomeBase related to the x, z position on the world.
      */
-    public BiomeBase a(int var1, int var2)
+    public BiomeBase getBiome(int var1, int var2) // CPCM - getBiome, mapped to a in reobf
     {
         return this.f.b(var1, var2);
     }
@@ -67,10 +67,12 @@ public class WorldChunkManager
     /**
      * Proxy for bukkit
      */
+    /* CPCM - remove - duplicate method after remap 
     public BiomeBase getBiome(int var1, int var2)
     {
         return this.a(var1, var2);
     }
+    */
     
     
 
