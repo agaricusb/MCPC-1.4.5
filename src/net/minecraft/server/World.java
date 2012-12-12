@@ -165,7 +165,7 @@ public abstract class World implements IBlockAccess {
 			}
 		}
 
-		return this.worldProvider.d.a(i, j);
+		return this.worldProvider.d.getBiome(i, j);
 	}
 
 	public WorldChunkManager getWorldChunkManager() {
