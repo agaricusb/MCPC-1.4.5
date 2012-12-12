@@ -16,7 +16,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 
-public class Block implements BlockProxy {
+public class Block /* implements BlockProxy CPCM - interface added dynamically in fml_marker.cfg */ {
     protected static int[] blockFireSpreadSpeed = new int[4096];
     protected static int[] blockFlammability = new int[4096];
     protected String currentTexture;

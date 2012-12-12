@@ -24,7 +24,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
-public abstract class EntityHuman extends EntityLiving implements ICommandListener, cpw.mods.fml.common.network.Player {
+public abstract class EntityHuman extends EntityLiving implements ICommandListener /*, cpw.mods.fml.common.network.Player CPCM - interface added in fml_marker.cfg */  {
 
     public PlayerInventory inventory = new PlayerInventory(this);
     private InventoryEnderChest enderChest = new InventoryEnderChest();
