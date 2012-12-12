@@ -1,3 +1,6 @@
+2012/12/11  1.2.5-R0.3 #002 - http://dl.dropbox.com/u/126404991/cpcm-1.4.5-002.jar
+    * Fix missing ()V iq/ch method (partial fix for EnderStorage)
 
-2012/12/11  1.2.5-R0.3 #001
+2012/12/11  1.2.5-R0.3 #001 - http://dl.dropbox.com/u/126404991/cpcm-1.4.5-001.jar
     * Initial build - based on MCPC dev 2.2
+
