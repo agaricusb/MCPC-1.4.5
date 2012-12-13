@@ -15,6 +15,7 @@ import net.minecraftforge.common.ForgeChunkManager;
 import java.util.Random;
 
 import org.bukkit.Server;
+import org.bukkit.craftbukkit.chunkio.ChunkIOExecutor;
 import org.bukkit.craftbukkit.util.LongHash;
 import org.bukkit.craftbukkit.util.LongHashSet;
 import org.bukkit.craftbukkit.util.LongObjectHashMap;
@@ -83,16 +84,30 @@ public class ChunkProviderServer implements IChunkProvider {
         }
     }
 
+    // CraftBukkit start - add async variant, provide compatibility
     public Chunk getChunkAt(int i, int j) {
-        // CraftBukkit start
+        return getChunkAt(i, j, null);
+    }
+
+    public Chunk getChunkAt(int i, int j, Runnable runnable) {
         this.unloadQueue.remove(i, j);
         Chunk chunk = (Chunk) this.chunks.get(LongHash.toLong(i, j));
         boolean newChunk = false;
+        ChunkRegionLoader loader = null;
+
+        if (this.e instanceof ChunkRegionLoader) {
+            loader = (ChunkRegionLoader) this.e;
+        }
+
+        // If the chunk exists but isn't loaded do it async
+        if (chunk == null && runnable != null && loader != null && loader.chunkExists(this.world, i, j)) {
+            ChunkIOExecutor.queueChunkLoad(this.world, loader, this, i, j, runnable);
+            return null;
+        }
         // CraftBukkit end
 
-        if (chunk == null) {
-            chunk =  ForgeChunkManager.fetchDormantChunk(LongHash.toLong(i, j), this.world);
-            
+        if (chunk == null) {                
+           chunk =  ForgeChunkManager.fetchDormantChunk(LongHash.toLong(i, j), this.world);
             if (chunk == null)
             	chunk = this.loadChunk(i, j);
             
@@ -134,6 +149,12 @@ public class ChunkProviderServer implements IChunkProvider {
 
             chunk.a(this, this, i, j);
         }
+
+        // CraftBukkit start - If we didn't need to load the chunk run the callback now
+        if (runnable != null) {
+            runnable.run();
+        }
+        // CraftBukkit end
 
         return chunk;
     }

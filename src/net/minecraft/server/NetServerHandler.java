@@ -877,8 +877,19 @@ public class NetServerHandler extends NetHandler {
 
                 this.chat(s, packet3chat.a_());
 
+                // Spigot start
+                boolean isCounted = true;
+                if (server.spamGuardExclusions != null) {
+                    for (String excluded : server.spamGuardExclusions) {
+                        if (s.startsWith(excluded)) {
+                            isCounted = false;
+                            break;
+                        }
+                    }
+                }
                 // This section stays because it is only applicable to packets
-                if (chatSpamField.addAndGet(this, 20) > 200 && !this.minecraftServer.getServerConfigurationManager().isOp(this.player.name)) { // CraftBukkit use thread-safe spam
+                if (isCounted && chatSpamField.addAndGet(this, 20) > 200 && !this.minecraftServer.getServerConfigurationManager().isOp(this.player.name)) { // CraftBukkit use thread-safe spam
+                    // Spigot end
                     // CraftBukkit start
                     if (packet3chat.a_()) {
                         Waitable waitable = new Waitable() {
@@ -1001,7 +1012,7 @@ public class NetServerHandler extends NetHandler {
         }
 
         try {
-            logger.info(event.getPlayer().getName() + " issued server command: " + event.getMessage()); // CraftBukkit
+            if (server.logCommands) logger.info(event.getPlayer().getName() + " issued server command: " + event.getMessage()); // Spigot
             if (this.server.dispatchCommand(event.getPlayer(), event.getMessage().substring(1))) {
                 return;
             }
@@ -1400,8 +1411,9 @@ public class NetServerHandler extends NetHandler {
                     flag = false;
                 } else {
                     for (i = 0; i < packet130updatesign.lines[j].length(); ++i) {
-                        if (SharedConstants.allowedCharacters.indexOf(packet130updatesign.lines[j].charAt(i)) < 0) {
+                        if (!SharedConstants.isAllowedChatCharacter(packet130updatesign.lines[j].charAt(i))) {
                             flag = false;
+                            break;
                         }
                     }
                 }

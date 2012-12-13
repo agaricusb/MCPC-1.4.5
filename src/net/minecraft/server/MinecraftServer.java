@@ -25,7 +25,6 @@ import org.bukkit.craftbukkit.util.Waitable;
 import org.bukkit.event.server.RemoteServerCommandEvent;
 import org.bukkit.event.world.WorldSaveEvent;
 
-import com.google.common.io.Files;
 // CraftBukkit end
 
 import net.minecraftforge.common.DimensionManager;
@@ -40,6 +39,7 @@ import cpw.mods.fml.common.Side;
 import cpw.mods.fml.common.asm.SideOnly;
 import cpw.mods.fml.relauncher.ArgsWrapper;
 import cpw.mods.fml.relauncher.FMLRelauncher;
+import com.google.common.io.Files;
 
 public abstract class MinecraftServer implements Runnable, IMojangStatistics, ICommandListener {
 
@@ -102,6 +102,10 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
     public int autosavePeriod;
     // CraftBukkit end
     public Hashtable worldTickTimes = new Hashtable();
+    // Spigot start
+    private static final int TPS = 20;
+    private static final int TICK_TIME = 1000000000 / TPS;
+    // Spigot end
 
     public MinecraftServer(OptionSet options) { // CraftBukkit - signature file -> OptionSet
         l = this;
@@ -426,40 +430,20 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
         try {
             if (this.init()) {
             	FMLCommonHandler.instance().handleServerStarted();
-                long i = System.currentTimeMillis();
+                long lastTick = System.nanoTime();
                 FMLCommonHandler.instance().onWorldLoadTick(this.worlds.toArray(new WorldServer[this.worlds.size()]));
 
-                for (long j = 0L; this.isRunning; this.Q = true) {
-                    long k = System.currentTimeMillis();
-                    long l = k - i;
-
-                    if (l > 2000L && i - this.R >= 15000L) {
-                        if (this.server.getWarnOnOverload()) // CraftBukkit - Added option to suppress warning messages
-                        log.warning("Can\'t keep up! Did the system time change, or is the server overloaded?");
-                        l = 2000L;
-                        this.R = i;
+                while (this.isRunning) {
+                    long curTime = System.nanoTime();
+                    long wait = TICK_TIME - (curTime - lastTick);
+                    if (wait > 0) {
+                        Thread.sleep(wait / 1000000);
                     }
-
-                    if (l < 0L) {
-                        log.warning("Time ran backwards! Did the system time change?");
-                        l = 0L;
-                    }
-
-                    j += l;
-                    i = k;
-                    if (this.worlds.get(0).everyoneDeeplySleeping()) { // CraftBukkit
-                        this.q();
-                        j = 0L;
-                    } else {
-                        while (j > 50L) {
-                            MinecraftServer.currentTick = (int) (System.currentTimeMillis() / 50); // CraftBukkit
-                            j -= 50L;
-                            this.q();
-                        }
-                    }
-
-                    Thread.sleep(1L);
+                    lastTick = System.nanoTime();
+                    MinecraftServer.currentTick = (int) (System.currentTimeMillis() / 50); // CraftBukkit
+                    this.q();
                 }
+                // Spigot end
                 FMLCommonHandler.instance().handleServerStopping();
             } else {
                 this.a((CrashReport) null);
@@ -485,6 +469,7 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
 
             this.a(crashreport);
         } finally {
+            org.bukkit.craftbukkit.util.WatchdogThread.stopping(); // Spigot
             try {
                 this.stop();
                 this.isStopped = true;
@@ -572,6 +557,8 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
             processQueue.remove().run();
         }
 
+        org.bukkit.craftbukkit.chunkio.ChunkIOExecutor.tick();
+
         // Send timeupdates to everyone, it will get the right time from the world the player is in.
         if (this.ticks % 20 == 0) {
             for (int i = 0; i < this.getServerConfigurationManager().players.size(); ++i) {
@@ -644,6 +631,7 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
         }
 
         this.methodProfiler.b();
+        org.bukkit.craftbukkit.util.WatchdogThread.tick(); // Spigot
     }
 
     public boolean getAllowNether() {
@@ -690,7 +678,7 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
             if (options.has("world")) {
                 dedicatedserver.l((String) options.valueOf("world"));
             }
-
+            dedicatedserver.primaryThread.setUncaughtExceptionHandler(new org.bukkit.craftbukkit.util.ExceptionHandler()); // Spigot
             dedicatedserver.primaryThread.start();
             // CraftBukkit end
         } catch (Exception exception) {

@@ -23,6 +23,7 @@ public final class SpawnerCreature {
     private static LongObjectHashMap<Boolean> b = new LongObjectHashMap<Boolean>(); // CraftBukkit - HashMap -> LongObjectHashMap
     // nightSpawnEntities
     protected static final Class[] a = new Class[] { EntitySpider.class, EntityZombie.class, EntitySkeleton.class};
+    private static byte spawnRadius = 0; // Spigot
 
     protected static ChunkPosition getRandomPosition(World world, int i, int j) {
         Chunk chunk = world.getChunkAt(i, j);
@@ -41,13 +42,21 @@ public final class SpawnerCreature {
 
             int i;
             int j;
+            // Spigot start - limit radius to spawn distance (chunks aren't loaded)
+            if (spawnRadius == 0) {
+                spawnRadius = (byte) worldserver.getServer().getViewDistance();
+                if (spawnRadius > 8) {
+                    spawnRadius = 8;
+                }
+            }
+            // Spigot end
 
             for (i = 0; i < worldserver.players.size(); ++i) {
                 EntityHuman entityhuman = (EntityHuman) worldserver.players.get(i);
                 int k = MathHelper.floor(entityhuman.locX / 16.0D);
 
                 j = MathHelper.floor(entityhuman.locZ / 16.0D);
-                byte b0 = 8;
+                byte b0 = spawnRadius; // Spigot - replace 8 with view distance constrained value
 
                 for (int l = -b0; l <= b0; ++l) {
                     for (int i1 = -b0; i1 <= b0; ++i1) {
@@ -91,20 +100,20 @@ public final class SpawnerCreature {
                         limit = worldserver.getWorld().getAmbientSpawnLimit();
                         break;
                 }
-
                 if (limit == 0) {
                     return 0;
                 }
+                int mobcnt = 0;
                 // CraftBukkit end
-
-                if ((!enumcreaturetype.d() || flag1) && (enumcreaturetype.d() || flag) && (!enumcreaturetype.e() || flag2) && worldserver.a(enumcreaturetype.a()) <= limit * b.size() / 256) { // CraftBukkit - use per-world limits
+                mobcnt = worldserver.a(enumcreaturetype.a());
+                if ((!enumcreaturetype.d() || flag1) && (enumcreaturetype.d() || flag) && (!enumcreaturetype.e() || flag2) && mobcnt <= (limit * b.size() / 256)) { // CraftBukkit - use per-world limits
                     Iterator iterator = b.keySet().iterator();
                     ArrayList var39 = new ArrayList(b.keySet());
                     Collections.shuffle(var39);
                     iterator = var39.iterator();
-                    
+                    int moblimit = (limit * b.size() / 256) - mobcnt + 1; // CraftBukkit - up to 1 more than limit
                     label110:
-                    while (iterator.hasNext()) {
+                    while (iterator.hasNext() && (moblimit > 0)) { // Spigot - while more allowed
                         // CraftBukkit start
                         long key = ((Long) iterator.next()).longValue();
 
@@ -151,7 +160,6 @@ public final class SpawnerCreature {
                                                                     break label103;
                                                                 }
                                                             }
-
                                                             EntityLiving entityliving;
 
                                                             try {
@@ -164,8 +172,15 @@ public final class SpawnerCreature {
                                                             entityliving.setPositionRotation((double) f, (double) f1, (double) f2, worldserver.random.nextFloat() * 360.0F, 0.0F);
                                                             if (entityliving.canSpawn()) {
                                                                 ++j2;
+                                                                // CraftBukkit - added a reason for spawning this creature
                                                                 worldserver.addEntity(entityliving, SpawnReason.NATURAL);
                                                                 a(entityliving, worldserver, f, f1, f2);
+                                                                // Spigot start
+                                                                moblimit--;
+                                                                if (moblimit <= 0) { // If we're past limit, stop spawn
+                                                                    continue label110;
+                                                                }
+                                                                // Spigot end
                                                                 if (j2 >= entityliving.bv()) {
                                                                     continue label110;
                                                                 }
@@ -261,7 +276,7 @@ public final class SpawnerCreature {
                             }
 
                             entityliving.setPositionRotation((double) f, (double) f1, (double) f2, random.nextFloat() * 360.0F, 0.0F);
-                           	world.addEntity(entityliving, SpawnReason.CHUNK_GEN);                            
+                            world.addEntity(entityliving, SpawnReason.CHUNK_GEN);                            
                             a(entityliving, world, f, f1, f2);
                             flag = true;
                         }
