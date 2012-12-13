@@ -54,7 +54,15 @@ public class RegionFileCache
 
 			if (var1 != null)
 			{
-				var1.c();
+				try
+				{
+					var1.c();
+				}
+				catch (IOException e)
+				{
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
 			}
 		}
 

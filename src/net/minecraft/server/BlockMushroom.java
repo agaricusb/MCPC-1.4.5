@@ -23,7 +23,7 @@ public class BlockMushroom extends BlockFlower {
     }
 
     public void b(World world, int i, int j, int k, Random random) {
-        if (random.nextInt(25) == 0) {
+        if (random.nextInt((int) (world.growthOdds * 100 / world.getWorld().mushroomGrowthModifier * 25)) == 0) { // Spigot
             byte b0 = 4;
             int l = 5;
 

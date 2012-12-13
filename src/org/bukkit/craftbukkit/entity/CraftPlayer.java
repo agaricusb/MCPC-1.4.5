@@ -211,7 +211,12 @@ public class CraftPlayer extends CraftHumanEntity implements Player {
     }
 
     public void kickPlayer(String message) {
+        kickPlayer(message, false);
+    }
+
+    public void kickPlayer(String message, boolean async) {
         if (getHandle().netServerHandler == null) return;
+        if (!async && !Bukkit.isPrimaryThread()) throw new IllegalStateException("Cannot kick player from asynchronous thread!"); // Spigot
 
         getHandle().netServerHandler.disconnect(message == null ? "" : message);
     }

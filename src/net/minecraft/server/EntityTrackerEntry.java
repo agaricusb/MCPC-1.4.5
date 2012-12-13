@@ -85,6 +85,7 @@ public class EntityTrackerEntry {
                 while (j0.hasNext()) {
                     EntityHuman j1 = (EntityHuman) j0.next();
                     EntityPlayer j2 = (EntityPlayer) j1;
+                    if (j2.sentFrames.contains(i4.uniqueId)) continue; // Spigot
 
                     i7.a(j2, i5);
                     if (j2.netServerHandler.lowPriorityCount() <= 5) {
@@ -92,6 +93,7 @@ public class EntityTrackerEntry {
 
                         if (j3 != null) {
                             j2.netServerHandler.sendPacket(j3);
+                            j2.sentFrames.add(i4.uniqueId); // Spigot
                         }
                     }
                 }

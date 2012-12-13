@@ -1,5 +1,11 @@
 Changelog:
 
+Build MCPC-1.4.5-beta-3
+	blood
+		Integrated Spigot build #290 into codeline. The biggest enhancement is Asynchronous Chunk I/O which should help boost
+		TPS on server. Check bukkit.yml for new spigot configurations to optimize further.
+		Fixed jline crashes when loading jar without --nojline.
+
 Build MCPC-1.4.5-dev-2.3
 	blood
 		Fixed plugin issue when creating new worlds. Applied some CB fixes. Removed java.nio.file dependency. Cleaned up code.

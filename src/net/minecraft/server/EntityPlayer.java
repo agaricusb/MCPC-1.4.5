@@ -51,6 +51,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public int newTotalExp = 0;
     public boolean keepLevel = false;
     // CraftBukkit end
+    public java.util.Set<java.util.UUID> sentFrames = new java.util.HashSet<java.util.UUID>(); // Spigot
 
     public EntityPlayer(MinecraftServer minecraftserver, World world, String s, ItemInWorldManager iteminworldmanager) {
         super(world);
