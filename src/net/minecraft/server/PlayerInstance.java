@@ -3,10 +3,15 @@ package net.minecraft.server;
 import java.util.ArrayList;
 import java.util.List;
 
-class PlayerInstance {
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.event.world.ChunkWatchEvent;
 
-    private final List b;
+// Forge start
+public class PlayerInstance {
+
+    public final List b;
     private final ChunkCoordIntPair location;
+// Forge end
     private short[] dirtyBlocks;
     private int dirtyCount;
     private int f;
@@ -55,6 +60,9 @@ class PlayerInstance {
             entityplayer.netServerHandler.sendPacket(new Packet51MapChunk(PlayerManager.a(this.playerManager).getChunkAt(this.location.x, this.location.z), true, 0));
             this.b.remove(entityplayer);
             entityplayer.chunkCoordIntPairQueue.remove(this.location);
+            // Forge start
+            MinecraftForge.EVENT_BUS.post(new ChunkWatchEvent.UnWatch(this.location, entityplayer));
+            // Forge end
             if (this.b.isEmpty()) {
                 long i = (long) this.location.x + 2147483647L | (long) this.location.z + 2147483647L << 32;
 

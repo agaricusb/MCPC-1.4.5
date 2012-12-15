@@ -76,7 +76,10 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
     public final long[] h = new long[100];
     public final long[] i = new long[100];
     public final long[] j = new long[100];
-    public long[][] k;
+    // Forge start
+    //public long[][] k;
+    public Hashtable<Integer, long[]> worldTickTimes = new Hashtable<Integer, long[]>();
+    // Forge end
     private KeyPair I;
     private String J;
     private String K;
@@ -101,7 +104,7 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
     public java.util.Queue<Runnable> processQueue = new java.util.concurrent.ConcurrentLinkedQueue<Runnable>();
     public int autosavePeriod;
     // CraftBukkit end
-    public Hashtable worldTickTimes = new Hashtable();
+    
     // Spigot start
     private static final int TPS = 20;
     private static final int TICK_TIME = 1000000000 / TPS;
@@ -181,7 +184,7 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
     protected void a(String s, String s1, long i, WorldType worldtype, String s2) {
         this.b(s);
         this.c("menu.loadingLevel");
-        // CraftBukkit - removed world and ticktime arrays
+        // Forge,CraftBukkit - removed world and ticktime arrays
         IDataManager idatamanager = this.convertable.a(s, true);
         WorldData worlddata = idatamanager.getWorldData();
         // CraftBukkit start - removed worldsettings
@@ -402,8 +405,14 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
             {
                 WorldServer worldserver = this.worlds.get(j);
                 MinecraftForge.EVENT_BUS.post(new WorldEvent.Unload(worldserver));
-                DimensionManager.setWorld(worldserver.dimension, (WorldServer)null);
+            // Forge start
             }
+            List<WorldServer> tmp = this.worlds;
+            for (WorldServer world : tmp)
+            {
+              	DimensionManager.setWorld(world.dimension, (WorldServer)null);
+            }
+            // Forge end
             if (this.n != null && this.n.d()) {
                 this.n.e();
             }

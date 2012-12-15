@@ -104,11 +104,23 @@ public class Chunk {
         }
     }
     
-
-    public Chunk(World var1, byte[] var2, byte[] var3, int var4, int var5)
+// Forge start
+    /**
+     * A Chunk Constructor which handles shorts to allow block ids > 256 (full 4096 range)
+     * Meta data sensitive
+     * NOTE: The x,y,z order of the array is different from the native Chunk constructor to allow for generation > y127
+     * NOTE: This is possibly more efficient than the standard constructor due to less memory skipping
+     *
+     * @param world The world this chunk belongs to
+     * @param ids A ShortArray containing all the BlockID's to set this chunk to (x is low order, z is mid, y is high)
+     * @param metadata A ByteArray containing all the metadata to set this chunk to
+     * @param chunkX The chunk's X position
+     * @param chunkZ The Chunk's Z position
+     */
+    public Chunk(World world, byte[] ids, byte[] metadata, int chunkX, int chunkZ)
     {
-        this(var1, var4, var5);
-        int var6 = var2.length / 256;
+        this(world, chunkX, chunkZ);
+        int var6 = ids.length / 256;
 
         for (int var7 = 0; var7 < 16; ++var7)
         {
@@ -117,8 +129,8 @@ public class Chunk {
                 for (int var9 = 0; var9 < var6; ++var9)
                 {
                     int var10 = var7 << 11 | var8 << 7 | var9;
-                    int var11 = var2[var10] & 255;
-                    byte var12 = var3[var10];
+                    int var11 = ids[var10] & 255;
+                    byte var12 = metadata[var10];
 
                     if (var11 != 0)
                     {

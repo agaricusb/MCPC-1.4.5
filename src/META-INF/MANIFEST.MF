@@ -2,4 +2,4 @@ Manifest-Version: 1.0
 Build-Jdk: 1.7
 Main-Class: org.bukkit.craftbukkit.Main
 Bukkit-Version: Bukkit-1.4.5-R0.3
-Forge-Version: 6.0.1.397
+Forge-Version: 6.4.1.430

@@ -1216,22 +1216,30 @@ public class NetServerHandler extends NetHandler {
     public void handleContainerClose(Packet101CloseWindow packet101closewindow) {
         if (this.player.dead) return; // CraftBukkit
 
-        // CraftBukkit start - INVENTORY_CLOSE hook
-        InventoryCloseEvent event = new InventoryCloseEvent(this.player.activeContainer.getBukkitView());
-        server.getPluginManager().callEvent(event);
-        this.player.activeContainer.transferTo(this.player.defaultContainer, getPlayer());
-        // CraftBukkit end
-
+        // MCPC - temp fix to allow IC2 to bypass this
+        if (this.player.activeContainer.getBukkitView() != null)
+        {
+        	// CraftBukkit start - INVENTORY_CLOSE hook
+        	InventoryCloseEvent event = new InventoryCloseEvent(this.player.activeContainer.getBukkitView());
+        	server.getPluginManager().callEvent(event);
+        	this.player.activeContainer.transferTo(this.player.defaultContainer, getPlayer());
+        	// CraftBukkit end
+        }
+        	
         this.player.k();
     }
 
     public void a(Packet102WindowClick packet102windowclick) {
         if (this.player.dead) return; // CraftBukkit
-
+        ItemStack itemstack = null;
+        SlotType type = null;
+        // MCPC - temp fix to allow IC2 to bypass Slot check
         if (this.player.activeContainer.windowId == packet102windowclick.a && this.player.activeContainer.c(this.player)) {
-            // CraftBukkit start - fire InventoryClickEvent
+            if (this.player.activeContainer.getBukkitView() !=null){
+            	
+        	// CraftBukkit start - fire InventoryClickEvent
             InventoryView inventory = this.player.activeContainer.getBukkitView();
-            SlotType type = CraftInventoryView.getSlotType(inventory, packet102windowclick.slot);
+            type = CraftInventoryView.getSlotType(inventory, packet102windowclick.slot);
 
             InventoryClickEvent event = new InventoryClickEvent(inventory, type, packet102windowclick.slot, packet102windowclick.button != 0, packet102windowclick.shift == 1);
             org.bukkit.inventory.Inventory top = inventory.getTopInventory();
@@ -1243,7 +1251,7 @@ public class NetServerHandler extends NetHandler {
             }
             server.getPluginManager().callEvent(event);
 
-            ItemStack itemstack = null;
+            
             boolean defaultBehaviour = false;
 
             switch(event.getResult()) {
@@ -1273,7 +1281,13 @@ public class NetServerHandler extends NetHandler {
                 }
                 break;
             }
+            }
             // CraftBukkit end
+            // MCPC - temp fix, use vanilla version here for IC2
+            else if (this.player.activeContainer.windowId == packet102windowclick.a && this.player.activeContainer.c(this.player))
+            {
+               itemstack = this.player.activeContainer.clickItem(packet102windowclick.slot, packet102windowclick.button, packet102windowclick.shift, this.player);
+            }
 
             if (ItemStack.matches(packet102windowclick.item, itemstack)) {
                 this.player.netServerHandler.sendPacket(new Packet106Transaction(packet102windowclick.a, packet102windowclick.d, true));
@@ -1293,6 +1307,7 @@ public class NetServerHandler extends NetHandler {
 
                 this.player.a(this.player.activeContainer, arraylist);
 
+                
                 // CraftBukkit start - send a Set Slot to update the crafting result slot
                 if(type == SlotType.RESULT && itemstack != null)
                     this.player.netServerHandler.sendPacket((Packet) (new Packet103SetSlot(this.player.activeContainer.windowId, 0, itemstack)));

@@ -1,5 +1,9 @@
 Changelog:
 
+Build MCPC-1.4.5-dev-3.1
+	blood
+		Applied latest Forge build #430. Applied patches to support IC2. Temporarily disabled World.tickEntites to fix issue with MoCreatures.
+
 Build MCPC-1.4.5-beta-3
 	blood
 		Integrated Spigot build #290 into codeline. The biggest enhancement is Asynchronous Chunk I/O which should help boost

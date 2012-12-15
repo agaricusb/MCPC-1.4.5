@@ -26,8 +26,11 @@ import cpw.mods.fml.common.network.FMLNetworkHandler;
 
 public abstract class EntityHuman extends EntityLiving implements ICommandListener /*, cpw.mods.fml.common.network.Player CPCM - interface added in fml_marker.cfg */  {
 
+	// Forge start
+	public static final String PERSISTED_NBT_TAG = "PlayerPersisted";
     public PlayerInventory inventory = new PlayerInventory(this);
     private InventoryEnderChest enderChest = new InventoryEnderChest();
+    // Forge end
     public Container defaultContainer;
     public Container activeContainer;
     protected FoodMetaData foodData = new FoodMetaData();
@@ -1512,7 +1515,17 @@ public abstract class EntityHuman extends EntityLiving implements ICommandListen
             this.setScore(entityhuman.getScore());
         }
 
+        // Forge start
         this.enderChest = entityhuman.enderChest;
+        
+        //Copy over a section of the Entity Data from the old player.
+        //Allows mods to specify data that persists after players respawn.
+        NBTTagCompound old = entityhuman.getEntityData();
+        if (old.hasKey(PERSISTED_NBT_TAG))
+        {
+            getEntityData().setCompound(PERSISTED_NBT_TAG, old.getCompound(PERSISTED_NBT_TAG));
+        }
+        // Forge end
     }
 
     protected boolean f_() {
