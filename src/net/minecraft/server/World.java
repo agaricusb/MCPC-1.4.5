@@ -249,28 +249,28 @@ public abstract class World implements IBlockAccess {
 		return this.getTypeId(i, k, j);
 	}
 	
-	// CPCM start 
-    public int getTypeId_API(int var1, int var2, int var3) {
+	// CPCM start - renamed to BlockChangeDelegate implement during CPCM reobf
+    public int getTypeId_API_CB(int var1, int var2, int var3) {
         return this.getTypeId(var1, var2, var3);
     }
 
-    public boolean isEmpty_API(int var1, int var2, int var3) {
+    public boolean isEmpty_API_CB(int var1, int var2, int var3) {
         return this.isEmpty(var1, var2, var3);
     }
 
-    public boolean setRawTypeId_API(int var1, int var2, int var3, int var4) {
+    public boolean setRawTypeId_API_CB(int var1, int var2, int var3, int var4) {
         return this.setRawTypeId(var1, var2, var3, var4);
     }
 
-    public boolean setRawTypeIdAndData_API(int var1, int var2, int var3, int var4, int var5) {
+    public boolean setRawTypeIdAndData_API_CB(int var1, int var2, int var3, int var4, int var5) {
         return this.setRawTypeIdAndData(var1, var2, var3, var4, var5);
     }
 
-    public boolean setTypeId_API(int var1, int var2, int var3, int var4) {
+    public boolean setTypeId_API_CB(int var1, int var2, int var3, int var4) {
         return this.setTypeId(var1, var2, var3, var4);
     }
 
-    public boolean setTypeIdAndData_API(int var1, int var2, int var3, int var4, int var5) {
+    public boolean setTypeIdAndData_API_CB(int var1, int var2, int var3, int var4, int var5) {
         return this.setTypeIdAndData(var1, var2, var3, var4, var5);
     }
     // CPCM end

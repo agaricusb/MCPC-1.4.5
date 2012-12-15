@@ -12232,9 +12232,9 @@ MD: net/minecraft/server/IChunkLoader/a ()V zx/a ()V
 MD: net/minecraft/server/IChunkLoader/b ()V zx/b ()V
 # CPCM - Bukkit API, BlockChangeDelegate interface implementation in World
 # The original methods are renamed to reobf, so we need to rename wrappers to the API methods
-MD: net/minecraft/server/World/getTypeId_API (III)I xv/getTypeId (III)I
-MD: net/minecraft/server/World/isEmpty_API (III)Z xv/isEmpty (III)Z
-MD: net/minecraft/server/World/setRawTypeIdAndData_API (IIIII)Z xv/setRawTypeIdAndData (IIIII)Z
-MD: net/minecraft/server/World/setRawTypeId_API (IIII)Z xv/setRawTypeId (IIII)Z
-MD: net/minecraft/server/World/setTypeId_API (IIII)Z xv/setTypeId (IIII)Z
-MD: net/minecraft/server/World/setTypeIdAndData_API (IIIII)Z xv/setTypeIdAndData (IIIII)Z
+MD: net/minecraft/server/World/getTypeId_API_CB (III)I xv/getTypeId (III)I
+MD: net/minecraft/server/World/isEmpty_API_CB (III)Z xv/isEmpty (III)Z
+MD: net/minecraft/server/World/setRawTypeIdAndData_API_CB (IIIII)Z xv/setRawTypeIdAndData (IIIII)Z
+MD: net/minecraft/server/World/setRawTypeId_API_CB (IIII)Z xv/setRawTypeId (IIII)Z
+MD: net/minecraft/server/World/setTypeId_API_CB (IIII)Z xv/setTypeId (IIII)Z
+MD: net/minecraft/server/World/setTypeIdAndData_API_CB (IIIII)Z xv/setTypeIdAndData (IIIII)Z
