@@ -1491,7 +1491,8 @@ public abstract class World implements IBlockAccess {
 	}
 
     // Spigot start
-    public int tickEntityExceptions = 0;
+	// MCPC - This interferes with MoCreatures so let's disable it for now
+   /* public int tickEntityExceptions = 0;
     public void entityJoinedWorld(final Entity entity, final boolean flag) {
         if (entity == null) {
             return;
@@ -1499,7 +1500,7 @@ public abstract class World implements IBlockAccess {
         try {
             tickEntity(entity, flag);
         } catch (Exception e) {
-            try {
+            /*try {
                 tickEntityExceptions++;
                 List<String> report = new ArrayList<String>();
                 report.add("Spigot has detected an unexpected exception while handling");
@@ -1515,14 +1516,14 @@ public abstract class World implements IBlockAccess {
             } catch (Throwable t) {
                 org.bukkit.craftbukkit.util.ExceptionReporter.handle(t, "Spigot has detected an unexpected exception while attempting to handle an exception (yes you read that correctly).");
                 Bukkit.shutdown();
-            }
+            }*
         }
     }
     /**
      * Will update the entity in the world if the chunk the entity is in is currently loaded or its forced to update.
      * Args: entity, forceUpdate
      */
-    public void tickEntity(Entity var1, boolean var2)
+    public void entityJoinedWorld(Entity var1, boolean var2)
     {
 // Spigot end
         int var3 = MathHelper.floor(var1.locX);
@@ -2645,8 +2646,9 @@ public abstract class World implements IBlockAccess {
 
 	public List getEntities(Entity entity, AxisAlignedBB axisalignedbb) {
     	// Spigot start
-        // this.P.clear();
-        ArrayList<?> entities = new ArrayList();
+		// MCPC - disable this spigot change for now due to issue with MoCreatures
+        this.P.clear();
+        //ArrayList<?> entities = new ArrayList();
         // Spigot end
 		int i = MathHelper.floor((axisalignedbb.a - MAX_ENTITY_RADIUS) / 16.0D);
 		int j = MathHelper.floor((axisalignedbb.d + MAX_ENTITY_RADIUS) / 16.0D);
@@ -2656,12 +2658,12 @@ public abstract class World implements IBlockAccess {
 		for (int i1 = i; i1 <= j; ++i1) {
 			for (int j1 = k; j1 <= l; ++j1) {
 				if (this.isChunkLoaded(i1, j1)) {
-                    this.getChunkAt(i1, j1).a(entity, axisalignedbb, entities); // Spigot
+                    this.getChunkAt(i1, j1).a(entity, axisalignedbb, this.P);
 				}
 			}
 		}
 
-        return entities; // Spigot
+        return this.P;
 	}
 
 	public List a(Class oclass, AxisAlignedBB axisalignedbb) {

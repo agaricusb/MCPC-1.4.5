@@ -6,6 +6,7 @@ import java.util.Map;
 import net.minecraft.server.ItemStack;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.Event;
+import net.minecraftforge.oredict.OreDictionary.OreRegisterEvent;
 
 import mcpc.com.google.common.collect.ImmutableMap;
 
@@ -66,13 +67,24 @@ public abstract class LiquidDictionary
      * Get an immutable list of the liquids defined
      *
      * @return the defined liquids
+     * @see LiquidDictionary#getLiquids()
      */
+    @Deprecated
     public Map<String, LiquidStack> getDefinedLiquids()
     {
-    	return ImmutableMap.copyOf(liquids);
+        return getLiquids();
     }
 
 
+    /**
+     * Get an immutable list of the liquids defined
+     *
+     * @return the defined liquids
+     */
+    public static Map<String, LiquidStack> getLiquids()
+    {
+        return ImmutableMap.copyOf(liquids);
+    }
     /**
      * Fired when a new liquid is created
      *

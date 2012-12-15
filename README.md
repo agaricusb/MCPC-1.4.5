@@ -3,10 +3,9 @@ How to build MCPC jar
 1. Make a bin folder where you build ur files from eclipse or build script.
 2. Compile your latest changes.
 3. Copy everything from bin into your craftbukkit 1.4.5R0.3 jar.
-4. Delete the com/google folder from the jar.
-5. Create a .bat file and add the following(assuming jar is named minecraft_server) :
+4. Create a .bat file and add the following(assuming jar is named mcpc-1.4.5-beta-3) :
 
-java -Xms2048M -Xmx2048M -jar minecraft_server.jar -o true --nojline
+java -Xms2048M -Xmx2048M -jar mcpc-1.4.5-beta-3.jar -o true
 PAUSE
 
 6. Play!

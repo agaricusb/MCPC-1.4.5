@@ -7,9 +7,12 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+// Forge start
 import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerDropsEvent;
+import net.minecraftforge.event.world.ChunkWatchEvent;
+// Forge end
 
 // CraftBukkit start
 import org.bukkit.Bukkit;
@@ -187,6 +190,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
                     Chunk chunk = (Chunk) iterator2.next();
 
                     this.p().getTracker().a(this, chunk);
+                    MinecraftForge.EVENT_BUS.post(new ChunkWatchEvent.Watch(chunk.l(), this));
                 }
             }
         }
@@ -594,9 +598,11 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
     public void a(Container container, List list) {
         this.netServerHandler.sendPacket(new Packet104WindowItems(container.windowId, list));
         this.netServerHandler.sendPacket(new Packet103SetSlot(-1, -1, this.inventory.getCarried()));
+        // MCPC - add check for null so IC2 doesn't crash here
         // CraftBukkit start - send a Set Slot to update the crafting result slot
-        if (java.util.EnumSet.of(InventoryType.CRAFTING,InventoryType.WORKBENCH).contains(container.getBukkitView().getType())) {
-            this.netServerHandler.sendPacket(new Packet103SetSlot(container.windowId, 0, container.getSlot(0).getItem()));
+        if (container.getBukkitView() != null)
+        	if (java.util.EnumSet.of(InventoryType.CRAFTING,InventoryType.WORKBENCH).contains(container.getBukkitView().getType())) {
+        		this.netServerHandler.sendPacket(new Packet103SetSlot(container.windowId, 0, container.getSlot(0).getItem()));
         }
         // CraftBukkit end
     }
