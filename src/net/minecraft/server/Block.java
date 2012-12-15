@@ -908,10 +908,11 @@ public class Block /* implements BlockProxy CPCM - interface added dynamically i
         return this.currentTexture;
     }
 
-    public void setTextureFile(String var1)
+    public Block setTextureFile(String var1)
     {
         this.currentTexture = var1;
         this.isDefaultTexture = false;
+        return this;
     }
 
     public float getExplosionResistance(Entity var1, World var2, int var3, int var4, int var5, double var6, double var8, double var10)

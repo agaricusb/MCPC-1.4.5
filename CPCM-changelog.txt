@@ -1,3 +1,6 @@
+2012/12/15  1.4.5-R0.3 #004 https://bitbucket.org/agaricusb/mcpc-1.4.5/downloads/cpcm-1.4.5-004.jar
+    * Fix setTextureFile incorrect signature, fixes https://github.com/agaricusb/MCPC-1.4.5/issues/4
+
 2012/12/12  1.4.5-R0.3 #003 - https://bitbucket.org/agaricusb/mcpc-1.4.5/downloads/cpcm-1.4.5-003.jar
     * Update to MCPC beta 3 with Spigot
 
