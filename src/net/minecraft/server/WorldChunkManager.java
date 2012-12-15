@@ -59,23 +59,11 @@ public class WorldChunkManager
     /**
      * Returns the BiomeBase related to the x, z position on the world.
      */
-    public BiomeBase getBiome(int var1, int var2) // CPCM - getBiome, mapped to a in reobf
+    public BiomeBase getBiome(int var1, int var2)
     {
         return this.f.b(var1, var2);
     }
     
-    /**
-     * Proxy for bukkit
-     */
-    /* CPCM - remove - duplicate method after remap 
-    public BiomeBase getBiome(int var1, int var2)
-    {
-        return this.a(var1, var2);
-    }
-    */
-    
-    
-
     /**
      * Returns a list of rainfall values for the specified blocks. Args: listToReuse, x, z, width, length.
      */

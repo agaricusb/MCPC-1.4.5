@@ -438,13 +438,13 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         super.a(d0, flag);
     }
 
-    public int nextContainerCounterGetInteger() { // CraftBukkit - private void -> public int // CPCM - rename to ..GetInteger
+    public int nextContainerCounterGetInteger_CB() { // CraftBukkit - private void -> public int // CPCM - rename to ..GetInteger_CB
         nextContainerCounter(); // CPCM - refactor
         return this.containerCounter; // CraftBukkit
     }
     
-    // CPCM start - vanilla-compatible method
-    private void nextContainerCounter() {
+    // CPCM start - vanilla-compatible (same signature) method
+    public void nextContainerCounter() { // CPCM - private void -> public int
     	this.containerCounter = this.containerCounter % 100 + 1;
     }
     // CPCM end
@@ -455,7 +455,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 1, "Crafting", 9));
         this.activeContainer = container; // CraftBukkit - Use container we passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -468,7 +468,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 4, "Enchanting", 9));
         this.activeContainer = container; // CraftBukkit - Use container we passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -481,7 +481,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 8, "Repairing", 9));
         this.activeContainer = container; // CraftBukkit - use container we passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -498,7 +498,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 0, iinventory.getName(), iinventory.getSize()));
         this.activeContainer = container; // CraftBukkit - Use container passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -511,7 +511,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 2, tileentityfurnace.getName(), tileentityfurnace.getSize()));
         this.activeContainer = container; // CraftBukkit - Use container passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -524,7 +524,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 3, tileentitydispenser.getName(), tileentitydispenser.getSize()));
         this.activeContainer = container; // CraftBukkit - Use container passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -537,7 +537,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 5, tileentitybrewingstand.getName(), tileentitybrewingstand.getSize()));
         this.activeContainer = container; // CraftBukkit - Use container passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -550,7 +550,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.netServerHandler.sendPacket(new Packet100OpenWindow(this.containerCounter, 7, tileentitybeacon.getName(), tileentitybeacon.getSize()));
         this.activeContainer = container; // CraftBukkit - Use container passed to event
         this.activeContainer.windowId = this.containerCounter;
@@ -563,7 +563,7 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         if(container == null) return;
         // CraftBukkit end
 
-        this.nextContainerCounterGetInteger();
+        this.nextContainerCounter();
         this.activeContainer = container; // CraftBukkit - Use container passed to event
         this.activeContainer.windowId = this.containerCounter;
         this.activeContainer.addSlotListener(this);

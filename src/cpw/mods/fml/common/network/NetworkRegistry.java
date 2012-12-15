@@ -302,7 +302,7 @@ public class NetworkRegistry
             Container container = (Container)handler.getServerGuiElement(modGuiId, player, world, x, y, z);
             if (container != null)
             {
-                player.nextContainerCounterGetInteger();
+                player.nextContainerCounter();
                 player.closeInventory();
                 int windowId = player.containerCounter;
                 Packet250CustomPayload pkt = new Packet250CustomPayload();
