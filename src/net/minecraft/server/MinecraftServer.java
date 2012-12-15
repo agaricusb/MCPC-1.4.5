@@ -110,6 +110,26 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
     private static final int TICK_TIME = 1000000000 / TPS;
     // Spigot end
 
+    // CPCM/MCPC start
+    // false if running MCPC, true if running CPCM
+    public static boolean isReobfuscated = false;
+
+    static {
+    	initReobfuscated();
+    }
+    
+    private static void initReobfuscated() {
+        try {
+            Class.forName("a"); // reobfuscated class name
+        } catch (Exception ex) {
+            isReobfuscated = false;
+            return;
+        }
+        isReobfuscated = true;
+    }
+    // CPCM/MCPC end
+
+
     public MinecraftServer(OptionSet options) { // CraftBukkit - signature file -> OptionSet
         l = this;
         // this.universe = file1; // CraftBukkit
@@ -821,7 +841,7 @@ public abstract class MinecraftServer implements Runnable, IMojangStatistics, IC
     }
 
     public String getServerModName() {
-        return "craftbukkit"; // CraftBukkit - cb > vanilla!
+        return !isReobfuscated ? "craftbukkit-mcpc" : "craftbukkit-cpcm"; // CraftBukkit - cb > vanilla!
     }
 
     public CrashReport b(CrashReport crashreport) {

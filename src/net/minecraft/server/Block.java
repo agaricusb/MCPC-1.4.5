@@ -16,7 +16,7 @@ import net.minecraftforge.common.ForgeHooks;
 import net.minecraftforge.common.IPlantable;
 import net.minecraftforge.common.MinecraftForge;
 
-public class Block implements BlockProxy {
+public class Block { 
     protected static int[] blockFireSpreadSpeed = new int[4096];
     protected static int[] blockFlammability = new int[4096];
     protected String currentTexture;
@@ -908,7 +908,6 @@ public class Block implements BlockProxy {
         return this.currentTexture;
     }
 
-    @SideOnly(Side.CLIENT)
     public Block setTextureFile(String var1)
     {
         this.currentTexture = var1;

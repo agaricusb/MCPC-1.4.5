@@ -139,7 +139,7 @@ import com.google.common.collect.MapMaker;
 import org.bukkit.craftbukkit.libs.jline.console.ConsoleReader;
 
 public final class CraftServer implements Server {
-    private final String serverName = "CraftBukkit";
+    private static final String serverName;
     private final String serverVersion;
     private final String bukkitVersion = Versioning.getBukkitVersion();
     private final ServicesManager servicesManager = new SimpleServicesManager();
@@ -174,6 +174,7 @@ public final class CraftServer implements Server {
     public int chunkGCLoadThresh = 0; // Spigot
 
     static {
+        serverName = !net.minecraft.server.MinecraftServer.isReobfuscated ? "CraftBukkit-MCPC" : "CraftBukkit-CPCM";
         ConfigurationSerialization.registerClass(CraftOfflinePlayer.class);
     }
 

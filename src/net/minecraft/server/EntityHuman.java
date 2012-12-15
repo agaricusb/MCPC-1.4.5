@@ -24,7 +24,7 @@ import org.bukkit.event.player.PlayerDropItemEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.network.FMLNetworkHandler;
 
-public abstract class EntityHuman extends EntityLiving implements ICommandListener, cpw.mods.fml.common.network.Player {
+public abstract class EntityHuman extends EntityLiving implements ICommandListener {
 
 	// Forge start
 	public static final String PERSISTED_NBT_TAG = "PlayerPersisted";

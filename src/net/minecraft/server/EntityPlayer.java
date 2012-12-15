@@ -438,10 +438,16 @@ public class EntityPlayer extends EntityHuman implements ICrafting {
         super.a(d0, flag);
     }
 
-    public int nextContainerCounter() { // CraftBukkit - private void -> public int
-        this.containerCounter = this.containerCounter % 100 + 1;
+    public int nextContainerCounterGetInteger_CB() { // CraftBukkit - private void -> public int // CPCM - rename to ..GetInteger_CB
+        nextContainerCounter(); // CPCM - refactor
         return this.containerCounter; // CraftBukkit
     }
+    
+    // CPCM start - vanilla-compatible (same signature) method
+    public void nextContainerCounter() { // CPCM - private void -> public int
+    	this.containerCounter = this.containerCounter % 100 + 1;
+    }
+    // CPCM end
 
     public void startCrafting(int i, int j, int k) {
         // CraftBukkit start - inventory open hook
