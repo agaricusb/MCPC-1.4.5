@@ -908,7 +908,6 @@ public class Block /* implements BlockProxy CPCM - interface added dynamically i
         return this.currentTexture;
     }
 
-    @SideOnly(Side.CLIENT)
     public Block setTextureFile(String var1)
     {
         this.currentTexture = var1;
